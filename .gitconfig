@@ -1,0 +1,47 @@
+[user]
+	name = Jannik Wempe
+	email = jannikwempe@gmail.com
+
+[credential]
+	helper = manager
+
+[core]
+	autocrlf = false
+	safecrlf = false
+	excludesfile = ~/.gitignore_global
+	editor = code --wait
+
+[rebase]
+	# Automatically stash before a rebase and unstash afterwards.
+	autoStash = true
+
+[alias]
+	# shortcuts
+	aa = add -A .
+	co = checkout
+	cob = checkout -b
+	cm = commit
+	cmm = commit -m
+	cma = commit --amend
+	st = status -sb
+	br = branch
+	# Delete local branch
+	# usage: git brd [BRANCHNAME]
+	brd = branch -D
+	# Prettify log
+	lg = log --graph --abbrev-commit --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+	h = log --graph --date=short --all --pretty=format:"%C(auto)%h %ad (%cr) %s%d [%Cgreen %an %Creset]"
+	# Pull latest changes and sync current branch with remote
+	sync = !git fetch --prune && git pull
+	# Make a quick commit with WIP(work in progress) message
+	wip = !git add --all && git commit -m "WIP"
+	# Make a quick commit with WIP(work in progress) message and skip validations
+	wipnv = !git add --all && git commit -m "WIP" --no-verify
+	# unstage a file
+	# usage: git unstage [FILENAME]
+	unstage = reset HEAD --
+	# Swtich to branch and fetch
+	master = !git checkout master && git fetch origin
+	dev = !git checkout develop && git fetch origin
+	# List all aliases
+	la = !git config -l | grep alias | cut -c 7-

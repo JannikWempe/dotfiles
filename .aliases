@@ -1,0 +1,89 @@
+# ---------------------------------
+# Common aliases
+# ---------------------------------
+
+alias reload='source ~/.zshrc'
+
+alias s='sudo $1'
+alias c='clear'
+alias '?=man'
+alias 'help=man'
+alias 'h=history'
+#copy output of last command to clipboard
+alias cl='fc -e -|pbcopy'
+
+# Folder navigation
+alias home='cd ~'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+# Folder listings
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Find file by name
+alias fd='find . -type d -name'
+# Find folder by name
+alias ff='find . -type f -name'
+
+# ---------------------------------
+# Safety nets
+# ---------------------------------
+# do not delete / or prompt if deleting more than 3 files at a time
+alias rm='rm -I --preserve-root'
+ 
+# confirmation
+alias mv='mv -i'
+alias cp='cp -i'
+alias ln='ln -i'
+ 
+# Parenting changing perms on /
+alias chown='chown --preserve-root'
+alias chmod='chmod --preserve-root'
+alias chgrp='chgrp --preserve-root'
+
+# ---------------------------------
+# Git
+# ---------------------------------
+
+# Note: these aliases have been moved to .gitconfig
+alias g='git'
+alias gf='git flow'
+
+# ---------------------------------
+# Brew
+# ---------------------------------
+# Update everything at once (brew && brew cask)
+alias brewup='brew update && brew upgrade && brew cu -a -f --cleanup -y && brew cleanup; brew doctor'
+
+# ---------------------------------
+# NPM
+# ---------------------------------
+
+# This makes life MUCH easier :')
+alias nr='npm run'
+alias ni='npm install'
+alias nid='npm install -D'
+alias nip='npm install --only=prod'
+
+# ---------------------------------
+# Python
+# ---------------------------------
+alias p='python'
+
+# ---------------------------------
+# Django
+# ---------------------------------
+alias pmmm='python manage.py makemigrations && python manage.py migrate'
+alias pmr='python manage.py runserver'
+alias pmrp='python manage.py runserver_plus'
+
+# TODO: Linux only
+# alias update='sudo apt update && sudo apt upgrade -y'
+
+# This should be the last line of the file
+# For local changes
+# Don't make edits below this
+[ -f ".aliases.local" ] && source ".aliases.local"

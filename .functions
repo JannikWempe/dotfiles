@@ -1,0 +1,47 @@
+# This line imports an OS specific functions file if one exists
+# Not been tested on any OS other than Mac OSX
+# TODO: find a better way than uname to distinguish between linux distros
+[ -f ".functions.$( uname )" ] && source ".functions.$( uname )"
+
+# I use playgrounds to experiment with new languages and features
+# without making a full fledged project
+# This creates a new playground with the name given as a command line arg
+
+# Create a new project and cd into it, does NOT check if project already exists
+project () {
+        # TODO : redirect io to /dev/null and write custom messages
+        if [ $# -lt 1 ] ; then
+                cd "$PATH_TO_PROJECTS" && echo 'In Projects'
+        fi
+
+        mkdir -p "$PATH_TO_PROJECTS/$1" && cd "$PATH_TO_PROJECTS/$1"
+        echo "In project $1"
+}
+
+# Create a new directory and enter it
+function mkcd() {
+	mkdir -p "$@" && cd "$_";
+}
+
+# `tre` is a shorthand for `tree` with hidden files and color enabled, ignoring
+# the `.git` directory, listing directories first. The output gets piped into
+# `less` with options to preserve color and line numbers, unless the output is
+# small enough for one screen.
+function tre() {
+	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
+}
+
+# Remove python compiled byte-code and mypy/pytest cache in either the current
+# directory or in a list of specified directories (including sub directories).
+function pyclean() {
+    ZSH_PYCLEAN_PLACES=${*:-'.'}
+    find ${ZSH_PYCLEAN_PLACES} -type f -name "*.py[co]" -delete
+    find ${ZSH_PYCLEAN_PLACES} -type d -name "__pycache__" -delete
+    find ${ZSH_PYCLEAN_PLACES} -depth -type d -name ".mypy_cache" -exec rm -r "{}" +
+    find ${ZSH_PYCLEAN_PLACES} -depth -type d -name ".pytest_cache" -exec rm -r "{}" +
+}
+
+# This should be the last line of the file
+# For local changes
+# Don't make edits below this
+[ -f ".functions.local" ] && source ".functions.local"

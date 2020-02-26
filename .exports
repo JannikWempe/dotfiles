@@ -1,0 +1,10 @@
+export PATH_TO_PROJECTS="$HOME/Projects"
+export TEXT_EDITOR="Visual Studio Code"
+
+# Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
+export PYTHONIOENCODING='UTF-8';
+
+# This should be the last line of the file
+# For local changes
+# Don't make edits below this
+[ -f ".exports.local" ] && source ".exports.local"

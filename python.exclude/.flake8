@@ -1,0 +1,7 @@
+# be sure to match with black (e.g. line-length)
+
+[flake8]
+max-line-length = 120
+# E203: whitespace before ‘:’ (done by black formatter)
+# W503: line break occurred before a binary operator (done by black formatter)
+ignore = E203, W503

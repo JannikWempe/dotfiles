@@ -1,0 +1,47 @@
+.project
+.idea
+.env
+.venv
+
+node_modules
+vendor
+.composer
+
+# Folder view configuration files
+.DS_Store
+Desktop.ini
+
+# Thumbnail cache files
+._*
+Thumbs.db
+
+# vim-session
+Session.vim
+
+# Backup
+*.bak
+*.tmp
+*~
+.*.sw*
+
+# Python
+*.pyc
+
+# Archives
+*.7z
+*.jar
+*.rar
+*.zip
+*.tgz
+*.gz
+*.bzip
+*.xz
+*.lzma
+*.iso
+*.tar
+*.dmg
+*.xpi
+*.gem
+*.egg
+*.deb
+*.rpm
