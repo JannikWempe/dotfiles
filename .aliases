@@ -12,6 +12,8 @@ alias 'h=history'
 #copy output of last command to clipboard
 alias cl='fc -e -|pbcopy'
 
+alias grep='grep --color=auto'
+
 # Folder navigation
 alias home='cd ~'
 alias ..='cd ..'
@@ -48,6 +50,7 @@ alias chgrp='chgrp --preserve-root'
 # Git
 # ---------------------------------
 
+alias ungit="find . -name '.git' -exec rm -rf {} \;"
 # Note: these aliases have been moved to .gitconfig
 alias g='git'
 alias gf='git flow'
@@ -81,6 +84,7 @@ alias pmr='python manage.py runserver'
 alias pmrp='python manage.py runserver_plus'
 
 # TODO: Linux only
+# alias install='sudo apt-get install'
 # alias update='sudo apt update && sudo apt upgrade -y'
 
 # This should be the last line of the file
