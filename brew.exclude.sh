@@ -33,7 +33,7 @@ brew install git
 # ---------------------------------------------
 
 # zsh
-brew install zsh
+# brew install zsh # pre-installed since catalina
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 chsh -s $(which zsh)
@@ -63,8 +63,8 @@ brew install pipenv
 # ---------------------------------------------
 # Databases
 # ---------------------------------------------
-
-brew cask install sqlitestudio
+brew cask install postgres
+brew cask install pgadmin4
 
 # ---------------------------------------------
 # Useful tools
@@ -116,7 +116,7 @@ brew cask install brave-browser
 brew cask install firefox
 
 # Install more recent versions of some macOS tools.
-brew install vim --with-override-system-vi
+# brew install vim --with-override-system-vi
 brew install grep
 brew install openssh
 

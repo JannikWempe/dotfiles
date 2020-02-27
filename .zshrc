@@ -31,7 +31,6 @@ plugins=(
     jsontools
     pip
     pipenv
-    timer
     vscode
     web-search
     zsh_reload
@@ -45,9 +44,9 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # Source this first since it contains the locations of directories needed by funcitons
-source .exports
-source .functions
-source .aliases
+source ~/.exports
+source ~/.functions
+source ~/.aliases
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
