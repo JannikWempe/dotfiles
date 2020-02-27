@@ -15,33 +15,75 @@
 	# Automatically stash before a rebase and unstash afterwards.
 	autoStash = true
 
+[pull]
+	rebase = true
+
 [alias]
 	# shortcuts
+	a = add
 	aa = add -A .
+
+	cl = clone
+
 	co = checkout
 	cob = checkout -b
+
 	cm = commit
 	cmm = commit -m
 	cma = commit --amend
+
+	d = diff
+
+	po = push origin
+
+	plo = pull origin
+
+	r = reset
+	r1 = reset HEAD^
+	r2 = reset HEAD^^
+	rh = reset --hard
+	rh1 = reset HEAD^ --hard
+	rh2 = reset HEAD^^ --hard
+
+	sl = stash list
+	sa = stash apply
+	ss = stash save
+
 	st = status -sb
+
 	br = branch
 	# Delete local branch
 	# usage: git brd [BRANCHNAME]
 	brd = branch -D
+	
 	# Prettify log
 	lg = log --graph --abbrev-commit --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 	h = log --graph --date=short --all --pretty=format:"%C(auto)%h %ad (%cr) %s%d [%Cgreen %an %Creset]"
+	
+	# amend to last commit w/o editing commit msg
+	amend = !git add -A && git commit --amend --no-edit
+
+
+	aacm = !git add -A . && git commit -m
+
 	# Pull latest changes and sync current branch with remote
-	sync = !git fetch --prune && git pull
+	# sync = !git fetch --prune && git pull
+	sync = git pull --rebase --prune
+	
 	# Make a quick commit with WIP(work in progress) message
 	wip = !git add --all && git commit -m "WIP"
 	# Make a quick commit with WIP(work in progress) message and skip validations
 	wipnv = !git add --all && git commit -m "WIP" --no-verify
-	# unstage a file
-	# usage: git unstage [FILENAME]
-	unstage = reset HEAD --
+	
+	# after a rebase: resets the dates to the author date in order to appear in chronological order
+	redate = rebase --committer-date-is-author-date
+
+	unstage = reset --soft HEAD^
+	
 	# Swtich to branch and fetch
 	master = !git checkout master && git fetch origin
 	dev = !git checkout develop && git fetch origin
+	
+	ec = config --global -e
 	# List all aliases
 	la = !git config -l | grep alias | cut -c 7-
