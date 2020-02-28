@@ -36,6 +36,8 @@
 	cmm = commit -m
 	cma = commit --amend
 
+	aacmm = !git add -A . && git commit -m
+
 	d = diff
 
 	po = push origin
@@ -70,9 +72,6 @@
 	
 	# amend to last commit w/o editing commit msg
 	amend = !git add -A && git commit --amend --no-edit
-
-
-	aacm = !git add -A . && git commit -m
 
 	# Pull latest changes and sync current branch with remote
 	# sync = !git fetch --prune && git pull
