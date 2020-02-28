@@ -1,7 +1,21 @@
-# be sure to match with black (e.g. line-length)
+# flake8 = pyflakes + pycodestyle + mccabe
 
+# black's settings : https://github.com/psf/black/blob/master/.flake8
 [flake8]
-max-line-length = 120
+# line length is intentionally set to 80 here because black uses Bugbear
+# See https://github.com/psf/black/blob/master/README.md#line-length for more details
+max-line-length = 80
+max-complexity = 18
 # E203: whitespace before ‘:’ (done by black formatter)
+# E266: too many leading ‘#’ for block comment
+# E501: line too long (82 > 79 characters) (Bugbears B950 respects 10% rule)
 # W503: line break occurred before a binary operator (done by black formatter)
-ignore = E203, W503
+ignore = E203, E266, E501, W503
+# B*** - flake8-bugbear (https://github.com/PyCQA/flake8-bugbear)
+# C9** - mccabe (C901 only; https://github.com/PyCQA/mccabe/blob/master/mccabe.py)
+# E*** / W*** - pycodestyle (pep8 errors and warnings; https://pycodestyle.readthedocs.io/en/latest/intro.html#error-codes)
+# F*** - PyFlakes (https://flake8.readthedocs.io/en/latest/user/error-codes.html)
+# T*** - flake8-mypy (add T4 if used; https://github.com/ambv/flake8-mypy)
+select = B,C,E,F,W,B9
+# 401: module imported but unused
+per-file-ignores = __init__.py: F401
