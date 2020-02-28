@@ -3,7 +3,8 @@
 	email = jannikwempe@gmail.com
 
 [credential]
-	helper = manager
+	helper = cache --timeout=600
+	# helper = osxkeychain
 
 [core]
 	autocrlf = false
@@ -40,7 +41,7 @@
 	po = push origin
 	# Push the current branch to the remote "origin", and set it to track the upstream branch
     pub = !git push -u origin $(git bname)
-	 # Delete remote branch
+	# Delete remote branch
     pd = push --delete origin
 
 	plo = pull origin
