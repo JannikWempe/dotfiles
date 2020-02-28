@@ -30,7 +30,7 @@ plugins=(
     gitignore
     jsontools
     pip
-    pipenv
+    poetry
     vscode
     web-search
     zsh_reload

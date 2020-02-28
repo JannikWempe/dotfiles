@@ -29,6 +29,17 @@ brew tap buo/cask-upgrade
 brew install git
 
 # ---------------------------------------------
+# Programming Languages and Frameworks
+# ---------------------------------------------
+
+# NodeJS 
+brew install node
+
+# Python 3
+brew install python
+brew install poetry
+
+# ---------------------------------------------
 # zsh && oh-my-zsh
 # ---------------------------------------------
 
@@ -44,21 +55,14 @@ fi
 if [ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting ]; then
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 fi
+# Add poetry completion; Poetry must be installed first
+if [ ! ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/poetry ]; then
+	poetry completions zsh > ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/poetry/_poetry
+fi
 # clone powerlevel10k theme
 if [ ! ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k ]; then
 	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
 fi
-
-# ---------------------------------------------
-# Programming Languages and Frameworks
-# ---------------------------------------------
-
-# NodeJS 
-brew install node
-
-# Python 3
-brew install python
-brew install pipenv
 
 # ---------------------------------------------
 # Databases
