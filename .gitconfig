@@ -19,6 +19,9 @@
 	rebase = true
 
 [alias]
+	# Get the current branch name (not so useful in itself, but used in other aliases)
+    bname = !git rev-parse --abbrev-ref HEAD
+
 	# shortcuts
 	a = add
 	aa = add -A .
@@ -35,6 +38,10 @@
 	d = diff
 
 	po = push origin
+	# Push the current branch to the remote "origin", and set it to track the upstream branch
+    pub = !git push -u origin $(git bname)
+	 # Delete remote branch
+    pd = push --delete origin
 
 	plo = pull origin
 
@@ -78,7 +85,8 @@
 	# after a rebase: resets the dates to the author date in order to appear in chronological order
 	redate = rebase --committer-date-is-author-date
 
-	unstage = reset --soft HEAD^
+	# undo last commit and keep it's commited file in staging area
+	uncommit = reset --soft HEAD^
 	
 	# Swtich to branch and fetch
 	master = !git checkout master && git fetch origin
