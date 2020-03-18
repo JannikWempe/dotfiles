@@ -4,7 +4,8 @@ export TEXT_EDITOR="Visual Studio Code"
 # Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
 export PYTHONIOENCODING='UTF-8';
 
-# Create poetry virtualenvs in projects .venv/
+# Create virtualenvs in projects .venv/
+export PIPENV_VENV_IN_PROJECT="enabled"
 export POETRY_VIRTUALENVS_IN_PROJECT=true
 
 # This should be the last line of the file
