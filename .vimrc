@@ -1,29 +1,26 @@
-set clipboard=unnamed
-
-" Set compatibility to Vim only.
+" Don't try to be vi compatible
 set nocompatible
 
-" Helps force plug-ins to load correctly when it is turned back on below.
-filetype off
-
-" Turn on syntax highlighting.
+" Turn on syntax highlighting
 syntax on
 
-" For plug-ins to load correctly.
-filetype plugin indent on
-
-" Turn off modelines
+" Security
 set modelines=0
 
-" Automatically wrap text that extends beyond the screen length.
-set wrap
-" Vim's auto indentation feature does not work properly with text copied from outside of Vim. Press the <F2> key to toggle paste mode on/off.
-nnoremap <F2> :set invpaste paste?<CR>
-imap <F2> <C-O>:set invpaste paste?<CR>
-set pastetoggle=<F2>
+" Show line numbers
+set number
 
-" Uncomment below to set the max textwidth. Use a value corresponding to the width of your screen.
-" set textwidth=79
+" Show file stats
+set ruler
+
+" Blink cursor on error instead of beeping (grr)
+set visualbell
+
+" Encoding
+set encoding=utf-8
+
+" Whitespace
+set wrap
 set formatoptions=tcqrn1
 set tabstop=2
 set shiftwidth=2
@@ -31,53 +28,110 @@ set softtabstop=2
 set expandtab
 set noshiftround
 
-" Display 5 lines above/below the cursor when scrolling with a mouse.
-set scrolloff=5
-" Fixes common backspace problems
-set backspace=indent,eol,start
+set smartindent
 
-" Speed up scrolling in Vim
+set colorcolumn=80
+highlight ColorColumn ctermbg=235 guibg=#2c2d27
+let &colorcolumn="80,".join(range(120,999),",")
+
+" Cursor motion
+set scrolloff=3
+set backspace=indent,eol,start
+set matchpairs+=<:> " use % to jump between pairs
+runtime! macros/matchit.vim
+
+set noswapfile
+set nobackup
+
+set undodir=~/.vim/undodir
+set undofile
+
+" Rendering
 set ttyfast
 
 " Status bar
 set laststatus=2
 
-" Display options
+" Last line
 set showmode
 set showcmd
 
-" Highlight matching pairs of brackets. Use the '%' character to jump between them.
-set matchpairs+=<:>
-
-" Display different types of white spaces.
-" set list
-" set listchars=tab:›\ ,trail:•,extends:#,nbsp:.
-
-" Show line numbers
-set number
-
-" Set status line display
-set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ [BUFFER=%n]\ %{strftime('%c')}
-
-" Encoding
-set encoding=utf-8
-
-" Highlight matching search patterns
+" Searching
 set hlsearch
-" Enable incremental search
 set incsearch
-" Include matching uppercase words with lowercase search term
-set ignorecase
-" Include only uppercase words with uppercase search term
 set smartcase
+set showmatch
 
-" Store info from no more than 100 files at a time, 9999 lines of text, 100kb of data. Useful for copying large amounts of data between files.
-set viminfo='100,<9999,s100
+call plug#begin('~/.vim/plugged')
 
-" Map the <Space> key to toggle a selected fold opened/closed.
-nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
-vnoremap <Space> zf
+Plug 'rhysd/vim-healthcheck'
+Plug 'preservim/nerdtree'
+Plug 'mbbill/undotree'
 
-" Automatically save and load folds
-autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview"
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'airblade/vim-rooter' " search from project dir and respect .gitignore
+
+call plug#end()
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => NERDTree
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Uncomment to autostart the NERDTree
+" autocmd vimenter * NERDTree
+map <C-n> :NERDTreeToggle<CR>
+let g:NERDTreeDirArrowExpandable = '►'
+let g:NERDTreeDirArrowCollapsible = '▼'
+let NERDTreeShowLineNumbers=1
+let NERDTreeShowHidden=1
+let NERDTreeMinimalUI = 1
+let g:NERDTreeWinSize=38
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Remap Keys
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let mapleader=" "
+
+" Remap ESC to ii
+:imap ii <Esc>
+
+" Easy Sourcing .vimrc
+nnoremap <Leader>a :source ~/.vimrc<CR>
+
+" Disable Arrow Keys
+for key in ['<Up>', '<Down>', '<Left>', '<Right>']
+  exec 'noremap' key '<Nop>'
+  exec 'inoremap' key '<Nop>'
+endfor
+
+nnoremap <Leader>u :UndotreeShow<CR>
+
+nnoremap <Leader>f :Files<CR>
+nnoremap <Leader>r :Rg<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Move Blocks
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Splits and Tabbed Files
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set splitbelow splitright
+
+" Remap splits navigation to just CTRL + hjkl
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Make adjusing split sizes a bit more friendly
+noremap <silent> <Leader>h :vertical resize +8<CR>
+noremap <silent> <Leader>l :vertical resize -8<CR>
+noremap <silent> <Leader>k :resize +8<CR>
+noremap <silent> <Leader>j :resize -8<CR>
