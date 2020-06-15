@@ -57,6 +57,7 @@ if [ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting ]; 
 fi
 # Add poetry completion; Poetry must be installed first
 if [ ! ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/poetry ]; then
+	mkdir ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/poetry
 	poetry completions zsh > ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/poetry/_poetry
 fi
 # clone powerlevel10k theme
@@ -78,7 +79,11 @@ brew cask install pgadmin4
 brew install httpie
 
 # Show directory structure with excellent formatting
-brew install tree
+brew install exa
+
+# Fuzzy search
+brew install fzf
+brew install ripgrep
 
 # code formatting & linting
 brew install prettier
@@ -118,6 +123,8 @@ brew cask install spotify
 brew cask install google-chrome
 brew cask install brave-browser
 brew cask install firefox
+# lulu firewall
+brew cask install lulu
 
 # Install more recent versions of some macOS tools.
 # brew install vim --with-override-system-vi

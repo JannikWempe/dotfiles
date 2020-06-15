@@ -21,9 +21,12 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 
 # Folder listings
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+if [ -x "$(command -v exa )" ]
+then
+  alias ll='exa -alF'
+else
+  alias ll='ls -alF'
+fi
 
 # Find file by name
 alias fd='find . -type d -name'
