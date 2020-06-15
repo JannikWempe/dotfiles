@@ -3,8 +3,8 @@
 	email = jannikwempe@gmail.com
 
 [credential]
-	helper = cache --timeout=600
-	# helper = osxkeychain
+	# helper = cache --timeout=600
+	helper = osxkeychain
 
 [core]
 	autocrlf = false
@@ -21,7 +21,7 @@
 
 [alias]
 	# Get the current branch name (not so useful in itself, but used in other aliases)
-    bname = !git rev-parse --abbrev-ref HEAD
+	bname = !git rev-parse --abbrev-ref HEAD
 
 	# shortcuts
 	a = add
@@ -42,9 +42,9 @@
 
 	po = push origin
 	# Push the current branch to the remote "origin", and set it to track the upstream branch
-    pub = !git push -u origin $(git bname)
+	pub = !git push -u origin $(git bname)
 	# Delete remote branch
-    pd = push --delete origin
+	pd = push --delete origin
 
 	plo = pull origin
 
