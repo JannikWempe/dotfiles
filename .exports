@@ -11,4 +11,4 @@ export POETRY_VIRTUALENVS_IN_PROJECT=true
 # This should be the last line of the file
 # For local changes
 # Don't make edits below this
-[ -f ".exports.local" ] && source ".exports.local"
+[ -f ~/.exports.local ] && source ~/.exports.local

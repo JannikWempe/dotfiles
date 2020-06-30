@@ -11,7 +11,7 @@ export ZSH="${HOME}/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-# Allow auto updates without prompt 
+# Allow auto updates without prompt
 DISABLE_UPDATE_PROMPT=true
 
 HIST_STAMPS="yyyy-mm-dd"
@@ -54,4 +54,4 @@ source ~/.aliases
 # This should be the last line of the file
 # For local changes
 # Don't make edits below this
-[ -f ".zshrc.local" ] && source ".zshrc.local"
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local

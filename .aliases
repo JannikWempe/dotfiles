@@ -93,4 +93,4 @@ alias pmrp='python manage.py runserver_plus'
 # This should be the last line of the file
 # For local changes
 # Don't make edits below this
-[ -f ".aliases.local" ] && source ".aliases.local"
+[ -f ~/.aliases.local ] && source ~/.aliases.local
