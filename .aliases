@@ -28,10 +28,7 @@ else
   alias ll='ls -alF'
 fi
 
-# Find file by name
-alias fd='find . -type d -name'
-# Find folder by name
-alias ff='find . -type f -name'
+alias vifi='vim $(fzf)'
 
 # ---------------------------------
 # Safety nets
