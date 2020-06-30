@@ -32,7 +32,7 @@ brew install git
 # Programming Languages and Frameworks
 # ---------------------------------------------
 
-# NodeJS 
+# NodeJS
 brew install node
 
 # Python 3
@@ -43,8 +43,6 @@ brew install poetry
 # zsh && oh-my-zsh
 # ---------------------------------------------
 
-# zsh
-# brew install zsh # pre-installed since catalina
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 chsh -s $(which zsh)
@@ -78,6 +76,9 @@ brew cask install pgadmin4
 # Make requests with awesome response formatting
 brew install httpie
 
+# Process manager
+brew install htop
+
 # Show directory structure with excellent formatting
 brew install exa
 
@@ -85,20 +86,13 @@ brew install exa
 brew install fzf
 brew install ripgrep
 
-# code formatting & linting
-brew install prettier
-brew install eslint
-brew install black
-brew install flake8
-
 # ---------------------------------------------
 # Misc
 # ---------------------------------------------
 
 # The Fire Code font
 # https://github.com/tonsky/FiraCode
-# This method of installation is
-# not officially supported, might install outdated version
+# This method of installation is not officially supported, might install outdated version
 # Change font in terminal preferences
 brew tap caskroom/fonts
 brew cask install font-fira-code
@@ -123,11 +117,12 @@ brew cask install spotify
 brew cask install google-chrome
 brew cask install brave-browser
 brew cask install firefox
+
 # lulu firewall
 brew cask install lulu
 
 # Install more recent versions of some macOS tools.
-# brew install vim --with-override-system-vi
+brew install vim --with-override-system-vi
 brew install grep
 brew install openssh
 
@@ -136,7 +131,6 @@ brew install openssh
 # ---------------------------------------------
 brew cask install iterm2
 brew cask install alfred
-brew cask install cheatsheet
 brew cask install atext
 brew cask install bartender
 brew cask install bettertouchtool
@@ -144,14 +138,8 @@ brew cask install bettertouchtool
 # ---------------------------------------------
 # Terminal gimmicks xD
 # ---------------------------------------------
-
-# The computer fortune teller 
 brew install fortune
-
-# The famous cowsay
 brew install cowsay
-
-# Multicolored text output
 brew install lolcat
 
 
