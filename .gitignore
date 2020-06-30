@@ -1,2 +1,4 @@
 # Local configuration files
 *.local
+
+.idea/
