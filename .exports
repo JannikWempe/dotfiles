@@ -8,6 +8,11 @@ export PYTHONIOENCODING='UTF-8';
 export PIPENV_VENV_IN_PROJECT="enabled"
 export POETRY_VIRTUALENVS_IN_PROJECT=true
 
+# Use fd for fzf
+export FZF_DEFAULT_COMMAND="fd --type f"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd --type d ."
+
 # This should be the last line of the file
 # For local changes
 # Don't make edits below this
