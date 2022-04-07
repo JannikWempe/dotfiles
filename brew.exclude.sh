@@ -33,7 +33,7 @@ brew install git
 # ---------------------------------------------
 
 # NodeJS
-brew install node
+brew install fnm # node version manager
 
 # Python 3
 brew install python
@@ -54,24 +54,23 @@ if [ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting ]; 
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 fi
 # Add poetry completion; Poetry must be installed first
-if [ ! ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/poetry ]; then
+if [ ! -e ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/poetry ]; then
 	mkdir ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/poetry
 	poetry completions zsh > ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/poetry/_poetry
 fi
 # clone powerlevel10k theme
-if [ ! ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k ]; then
+if [ ! -e ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k ]; then
 	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
 fi
 
 # ---------------------------------------------
-# Databases
-# ---------------------------------------------
-brew cask install postgres
-brew cask install pgadmin4
-
-# ---------------------------------------------
 # Useful tools
 # ---------------------------------------------
+
+brew install aws
+brew install aws-sam-cli
+
+brew install gh
 
 # Make requests with awesome response formatting
 brew install httpie
@@ -79,8 +78,15 @@ brew install httpie
 # Process manager
 brew install htop
 
+brew install zoxide
+
 # Show directory structure with excellent formatting
 brew install exa
+
+# cat with syntax highlighting
+brew install bat
+
+brew install tree
 
 # Fuzzy search
 brew install fzf
@@ -95,31 +101,37 @@ brew install ripgrep
 # This method of installation is not officially supported, might install outdated version
 # Change font in terminal preferences
 brew tap caskroom/fonts
-brew cask install font-fira-code
+brew install --cask font-fira-code
 
-brew cask install visual-studio-code
+brew install --cask visual-studio-code
+brew install --cask postman
 
 # includes Docker Engine, Docker CLI client, Docker Compose, Notary, Kubernetes, and Credential Helper
 # https://docs.docker.com/docker-for-mac/install/#whats-included-in-the-installer
-brew cask install docker
+brew install --cask docker
 
-brew cask install 1password
-brew cask install notion
-brew cask install postman
+brew install --cask 1password
+brew install --cask notion
+brew install --cask obsidian
+brew install --cask discord
+brew install --cask slack
 
-brew cask install dropbox
-brew cask install appcleaner
-brew cask install vlc
-brew cask install whatsapp
-brew cask install spotify
+brew install --cask appcleaner
+brew install --cask vlc
+brew install --cask spotify
+
+brew install --cask stats
+brew install --cask keka
+
+brew install --cask obs
 
 # browsers
-brew cask install google-chrome
-brew cask install brave-browser
-brew cask install firefox
+brew install --cask google-chrome
+brew install --cask brave-browser
+brew install --cask firefox
 
 # lulu firewall
-brew cask install lulu
+brew install --cask lulu
 
 # Install more recent versions of some macOS tools.
 brew install vim --with-override-system-vi
@@ -129,11 +141,11 @@ brew install openssh
 # ---------------------------------------------
 # Productivity
 # ---------------------------------------------
-brew cask install iterm2
-brew cask install alfred
-brew cask install atext
-brew cask install bartender
-brew cask install bettertouchtool
+brew install --cask iterm2
+brew install --cask alfred
+brew install --cask bartender
+brew install --cask bettertouchtool
+brew install --cask cyberduck
 
 # ---------------------------------------------
 # Terminal gimmicks xD

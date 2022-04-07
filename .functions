@@ -3,15 +3,8 @@
 # TODO: find a better way than uname to distinguish between linux distros
 [ -f ".functions.$( uname )" ] && source ".functions.$( uname )"
 
-# Create a new project and cd into it, does NOT check if project already exists
-project () {
-        # TODO : redirect io to /dev/null and write custom messages
-        if [ $# -lt 1 ] ; then
-                cd "$PATH_TO_PROJECTS" && echo 'In Projects'
-        fi
-
-        mkdir -p "$PATH_TO_PROJECTS/$1" && cd "$PATH_TO_PROJECTS/$1"
-        echo "In project $1"
+function kill-port() {
+  lsof -i tcp:$1 | awk 'NR!=1 {print $2}' | xargs kill -9
 }
 
 # Create a new directory and enter it

@@ -1,5 +1,4 @@
-# pinutz23 dotfiles
-Currently only compatible with macos
+# MacOS dotfiles
 
 ## Use cases
 - setup a new Mac
@@ -14,6 +13,7 @@ Currently only compatible with macos
     - just execute `.macos`
 
 ## Inspirations
+- [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles)
 - [ajmalsiddiqui/dotfiles](https://github.com/ajmalsiddiqui/dotfiles) _(initial inspiration)_
 - [natelandau's ist](https://gist.github.com/natelandau/10654137)
 - [kdeldycke/dotfiles](https://github.com/kdeldycke/dotfiles) _(additional macOS settings)_

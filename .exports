@@ -1,4 +1,3 @@
-export PATH_TO_PROJECTS="$HOME/Projekte"
 export TEXT_EDITOR="Visual Studio Code"
 
 # Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
@@ -9,9 +8,22 @@ export PIPENV_VENV_IN_PROJECT="enabled"
 export POETRY_VIRTUALENVS_IN_PROJECT=true
 
 # Use fd for fzf
-export FZF_DEFAULT_COMMAND="fd --type f"
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="fd --type d ."
+export FZF_DEFAULT_COMMAND="fd --hidden --follow --exclude '.git' --exclude 'node_modules'"
+export FZF_DEFAULT_OPTS="
+--layout=reverse
+--info=inline
+--multi
+--height=80%
+--preview-window=:hidden
+--preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'
+--bind '?:toggle-preview'
+--bind 'ctrl-a:select-all'
+"
+
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND --type f"
+# Enable ALT_C
+bindkey "ç" fzf-cd-widget
+export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND --type d"
 
 # This should be the last line of the file
 # For local changes

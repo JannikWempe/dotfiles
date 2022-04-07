@@ -9,6 +9,7 @@ alias c='clear'
 alias '?=man'
 alias 'help=man'
 alias 'h=history'
+alias 'hs=history | grep -i'
 #copy output of last command to clipboard
 alias cl='fc -e -|pbcopy'
 
@@ -23,9 +24,15 @@ alias ....='cd ../../..'
 # Folder listings
 if [ -x "$(command -v exa )" ]
 then
-  alias ll='exa -alF'
+  alias ll='exa -a --long --git --time-style=long-iso --group-directories-first'
+  alias tree='exa -T --group-directories-first'
 else
   alias ll='ls -alF'
+fi
+
+if [ -x "$(command -v bat)" ]; then
+  unalias -m 'cat'
+  alias cat='bat -pp --theme="Nord"'
 fi
 
 alias vifi='vim $(fzf)'
@@ -75,17 +82,6 @@ alias nip='npm install --only=prod'
 # Python
 # ---------------------------------
 alias p='python'
-
-# ---------------------------------
-# Django
-# ---------------------------------
-alias pmmm='python manage.py makemigrations && python manage.py migrate'
-alias pmr='python manage.py runserver'
-alias pmrp='python manage.py runserver_plus'
-
-# TODO: Linux only
-# alias install='sudo apt-get install'
-# alias update='sudo apt update && sudo apt upgrade -y'
 
 # This should be the last line of the file
 # For local changes

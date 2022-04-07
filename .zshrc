@@ -14,32 +14,45 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Allow auto updates without prompt
 DISABLE_UPDATE_PROMPT=true
 
+# show timostamps for `history`
 HIST_STAMPS="yyyy-mm-dd"
+# don't put duplicates and commands starting with whitespace into history
+HISTCONTROL=ignoreboth
 
 # See https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins
 plugins=(
+    ### aliases
     brew
-    command-not-found
-    # common-aliases # using my own selection of common aliases
-    django
+    macos
+    docker-compose # + autocompletions
+    pip # + autocompletions
+    aws # + utilities
+    # common-aliases # using my own aliases
+    # git # using my own aliases
+    # npm # using my own aliases
+    
+    ### autocompletions
     docker
-    docker-compose
-    gatsby
-    # git # using my own git aliases
-    # git-flow # using my own git aliases
-    gitignore
+    fd
+    ripgrep
+    fnm
+    gh
+    fzf # + key bindings
+
+    ### tools
     jsontools
-    pip
-    poetry
-    vscode
     web-search
-    zsh_reload
-    zsh-autosuggestions
+
+    # zsh-autosuggestions
     zsh-syntax-highlighting
-    # TODO: one of the follwing:
-    # osx
-    # ubuntu
+    zsh-completions # manually cloned
 )
+export ZSH_HIGHLIGHT_MAXLENGTH=512
+
+# PNPM
+# tabtab source for packages
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
 
 source $ZSH/oh-my-zsh.sh
 
@@ -48,12 +61,16 @@ source ~/.exports
 source ~/.functions
 source ~/.aliases
 
+# Initialise zoxide if executable exists
+if [ -x "$(command -v zoxide)" ]; then
+  eval "$(zoxide init zsh)"
+fi
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[ -f ~/.p10k.zsh ] && source ~/.p10k.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# This should be the last line of the file
+# This should be the last line of the file; don't make edits below this
 # For local changes
-# Don't make edits below this
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
