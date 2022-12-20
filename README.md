@@ -1,5 +1,14 @@
 # MacOS dotfiles
 
+## How to use?
+
+- Symlink (`ln -sv [source] [target]`) the required files to their desired destination.
+- Run the homebrew script
+
+> **Warning** The below instructions do not work.
+
+[ ] Update the setup script
+
 ## Use cases
 - setup a new Mac
     - run `.bootstrap.exclude.sh` and `.macos`
