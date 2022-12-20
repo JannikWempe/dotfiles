@@ -11,6 +11,12 @@ export ZSH="${HOME}/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
+# Load 1Password CLI completions
+eval "$(op completion zsh)"
+
+# Activate Node environment on cd
+eval "$(fnm --log-level quiet env --use-on-cd)"
+
 # Allow auto updates without prompt
 DISABLE_UPDATE_PROMPT=true
 
@@ -74,3 +80,8 @@ fi
 # This should be the last line of the file; don't make edits below this
 # For local changes
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+# pnpm
+export PNPM_HOME="/Users/jannik/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end

@@ -35,7 +35,21 @@ if [ -x "$(command -v bat)" ]; then
   alias cat='bat -pp --theme="Nord"'
 fi
 
+if [ -x "$(command -v fnm)" ]; then
+  alias nvm='fnm'
+fi
+
+
+# ---------------------------------
+# vim
+# ---------------------------------
+
+if [ -x "$(command -v nvim)" ]; then
+  alias vim='nvim'
+fi
+
 alias vifi='vim $(fzf)'
+
 
 # ---------------------------------
 # Safety nets

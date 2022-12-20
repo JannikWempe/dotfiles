@@ -1,6 +1,6 @@
 [user]
 	name = Jannik Wempe
-	email = jannikwempe@gmail.com
+	email = jannik@wempe.dev
 
 [credential]
 	# helper = cache --timeout=600
@@ -104,8 +104,12 @@
 	program = smimesign
 [gpg]
 	format = x509
-[rerere]
-	autoupdate = true
-	enabled = true
+# [rerere]
+# 	autoupdate = true
+# 	enabled = true
 [init]
 	defaultBranch = main
+
+
+[includeIf "gitdir/i:~/Code/hashnode/"]
+	path = ~/.gitconfig-hashnode

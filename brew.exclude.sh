@@ -100,8 +100,7 @@ brew install ripgrep
 # https://github.com/tonsky/FiraCode
 # This method of installation is not officially supported, might install outdated version
 # Change font in terminal preferences
-brew tap caskroom/fonts
-brew install --cask font-fira-code
+brew tap homebrew/cask-fonts && brew  install --cask font-fira-code
 
 brew install --cask visual-studio-code
 brew install --cask postman
