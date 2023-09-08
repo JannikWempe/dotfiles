@@ -40,6 +40,10 @@ if [ -x "$(command -v fnm)" ]; then
 fi
 
 
+if [ -x "$(command -v pnpm)" ]; then
+  alias pn='pnpm'
+fi
+
 # ---------------------------------
 # vim
 # ---------------------------------
@@ -56,12 +60,12 @@ alias vifi='vim $(fzf)'
 # ---------------------------------
 # do not delete / or prompt if deleting more than 3 files at a time
 # alias rm='rm -I --preserve-root' # doesn't work on macos "illegal option -- I"
- 
+
 # confirmation
 alias mv='mv -i'
 alias cp='cp -i'
 alias ln='ln -i'
- 
+
 # Parenting changing perms on /
 alias chown='chown --preserve-root'
 # alias chmod='chmod --preserve-root' # doesn't work on macos
