@@ -11,6 +11,7 @@
 	safecrlf = false
 	excludesfile = ~/.gitignore_global
 	editor = code --wait
+	pager = delta
 
 [rebase]
 	# Automatically stash before a rebase and unstash afterwards.
@@ -49,12 +50,14 @@
 	d = diff
 
 	po = push origin
+	pf = push --force-with-lease
 	# Push the current branch to the remote "origin", and set it to track the upstream branch
 	pub = !git push -u origin $(git bname)
 	# Delete remote branch
 	pd = push --delete origin
 
-	plo = pull origin
+	f = fetch
+	pl = pull origin
 
 	r = reset
 	r1 = reset HEAD^
@@ -65,48 +68,53 @@
 
 	sl = stash list
 	sa = stash apply
+	sp = stash pop
 	ss = stash save
 
 	st = status -sb
 
 	br = branch
 	brd = !git branch | fzf | xargs -t git branch -D # delete local branch
-	
+
 	# Prettify log
 	lg = log --graph --abbrev-commit --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 	h = log --graph --date=short --all --pretty=format:"%C(auto)%h %ad (%cr) %s%d [%Cgreen %an %Creset]"
-	
+
 	# amend to last commit w/o editing commit msg
 	amend = !git add -A && git commit --amend --no-edit
 
 	# Pull latest changes and sync current branch with remote
 	# sync = !git fetch --prune && git pull
 	sync = git pull --rebase --prune
-	
+	# "reFRESH": Include latest changes from base branch and rebase current branch on top of it
+	# ex: git fresh <base branch>
+	fresh = "!f() { git switch $1 && git pull && git switch - && git rebase $1; };f"
+
 	# Make a quick commit with WIP(work in progress) message and bypass the pre-commit and commit-msg hooks
 	wip = !git add --all && git commit -m "WIP" --no-verify
-	
+
 	# after a rebase: resets the dates to the author date in order to appear in chronological order
 	redate = rebase --committer-date-is-author-date
 
 	# undo last commit and keep it's commited file in staging area
 	uncommit = reset --soft HEAD^
-	
-	# Swtich to branch and fetch
-	master = !git checkout master && git fetch origin
-	dev = !git checkout develop && git fetch origin
-	
-	ec = config --global -e
+
 	# List all aliases
 	la = !git config -l | grep alias | cut -c 7-
 	alias = config --get-regexp ^alias\\.
+
+	# -- Comparisons --
+	new = lg main..HEAD
+	missing = lg HEAD..main
+
 [gpg "x509"]
 	program = smimesign
 [gpg]
 	format = x509
-# [rerere]
-# 	autoupdate = true
-# 	enabled = true
+# Save resolved conflicts so they can be reused later
+[rerere]
+	# autoupdate = true
+	enabled = true
 [init]
 	defaultBranch = main
 
