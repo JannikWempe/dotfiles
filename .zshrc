@@ -36,7 +36,7 @@ plugins=(
     # common-aliases # using my own aliases
     # git # using my own aliases
     # npm # using my own aliases
-    
+
     ### autocompletions
     docker
     fd
@@ -71,6 +71,9 @@ source ~/.aliases
 if [ -x "$(command -v zoxide)" ]; then
   eval "$(zoxide init zsh)"
 fi
+
+# bun completions (added via `bun completions`)
+[ -s "/opt/homebrew/Cellar/bun/1.0.0/share/zsh/site-functions/_bun" ] && source "/opt/homebrew/Cellar/bun/1.0.0/share/zsh/site-functions/_bun"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [ -f ~/.p10k.zsh ] && source ~/.p10k.zsh
