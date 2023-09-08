@@ -81,7 +81,7 @@ brew install htop
 brew install zoxide
 
 # Show directory structure with excellent formatting
-brew install exa
+brew install eza
 
 # cat with syntax highlighting
 brew install bat

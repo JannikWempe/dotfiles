@@ -22,10 +22,10 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 
 # Folder listings
-if [ -x "$(command -v exa )" ]
+if [ -x "$(command -v eza )" ]
 then
-  alias ll='exa -a --long --git --time-style=long-iso --group-directories-first'
-  alias tree='exa -T --group-directories-first'
+  alias ll='eza -a -a -l --git --time-style=long-iso --group-directories-first --icons'
+  alias tree='eza -T --group-directories-first'
 else
   alias ll='ls -alF'
 fi
