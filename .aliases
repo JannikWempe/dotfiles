@@ -86,15 +86,6 @@ alias gf='git flow'
 # Update everything at once (brew && brew cask)
 alias brewup='brew update && brew upgrade && brew cu -a -f --cleanup -y && brew cleanup; brew doctor'
 
-# ---------------------------------
-# NPM
-# ---------------------------------
-
-# This makes life MUCH easier :')
-alias nr='npm run'
-alias ni='npm install'
-alias nid='npm install -D'
-alias nip='npm install --only=prod'
 
 # ---------------------------------
 # Python
