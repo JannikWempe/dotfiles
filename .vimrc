@@ -60,6 +60,13 @@ nnoremap <Leader>u :UndotreeShow<CR>
 nnoremap <Leader>f :Files<CR>
 nnoremap <Leader>r :Rg<CR>
 
+" center after navigation
+nnoremap <C-u> <C-u>zz
+nnoremap <C-d> <C-d>zz
+" center moving through search
+nnoremap n nzz
+nnoremap N Nzz
+
 " Make adjusing split sizes a bit more friendly
 noremap <silent> <Leader>h :vertical resize +8<CR>
 noremap <silent> <Leader>l :vertical resize -8<CR>

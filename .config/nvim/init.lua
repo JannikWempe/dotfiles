@@ -1,4 +1,2 @@
-require('craftzdog.base')
-require('craftzdog.maps')
-require('craftzdog.plugins')
-require('craftzdog.macos')
+-- bootstrap lazy.nvim, LazyVim and your plugins
+require("config.lazy")

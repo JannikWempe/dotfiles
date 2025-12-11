@@ -11,11 +11,14 @@ export ZSH="${HOME}/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
+# fixes compdef not found error
+# see: https://stackoverflow.com/a/76900597
+autoload -Uz compinit && compinit
 # Load 1Password CLI completions
 eval "$(op completion zsh)"
 
 # Activate Node environment on cd
-eval "$(fnm --log-level quiet env --use-on-cd)"
+eval "$(fnm --log-level quiet env --use-on-cd --version-file-strategy recursive)"
 
 # Allow auto updates without prompt
 DISABLE_UPDATE_PROMPT=true
@@ -69,7 +72,12 @@ source ~/.aliases
 
 # Initialise zoxide if executable exists
 if [ -x "$(command -v zoxide)" ]; then
-  eval "$(zoxide init zsh)"
+  # init and use instead of `cd`
+  # eval "$(zoxide init --cmd cd zsh)"
+
+  # Zoxide (cd replacement)
+  # Only initialize in interactive shells to avoid issues with Claude Code
+  [[ $- == *i* ]] && [ -z "$DISABLE_ZOXIDE" ] && eval "$(zoxide init --cmd cd zsh)"
 fi
 
 # bun completions (added via `bun completions`)
@@ -80,10 +88,6 @@ fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# This should be the last line of the file; don't make edits below this
-# For local changes
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local
-
 # pnpm
 export PNPM_HOME="/Users/jannik/Library/pnpm"
 case ":$PATH:" in
@@ -91,3 +95,19 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+. "$HOME/.local/bin/env"
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/jannik/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
+
+# add kubectl completion
+if [ -x "$(command -v kubectl)" ]; then
+  source <(kubectl completion zsh)
+fi
+
+# This should be the last line of the file; don't make edits below this
+# For local changes
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local

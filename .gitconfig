@@ -1,6 +1,8 @@
 [user]
 	name = Jannik Wempe
 	email = jannik@wempe.dev
+	# list keys by running `gpg --list-secret-keys --keyid-format LONG`
+	signingkey = 4C393C1D51A7FF9B # jannik@wempe.dev key
 
 [credential]
 	# helper = cache --timeout=600
@@ -9,9 +11,25 @@
 [core]
 	autocrlf = false
 	safecrlf = false
-	excludesfile = ~/.gitignore_global
-	editor = code --wait
+	editor = nvim
 	pager = delta
+	ignorecase = false
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    # dark = true      # or light = true, or omit for auto-detection
+		line-numbers = true
+		side-by-side = true
+
+[merge]
+    conflictStyle = zdiff3
+
+[commit]
+	# sign commits by default
+	gpgsign = true
 
 [rebase]
 	# Automatically stash before a rebase and unstash afterwards.
@@ -23,29 +41,26 @@
 [alias]
 	### helpers
 	# Get the current branch name (not so useful in itself, but used in other aliases)
-	bname = !git rev-parse --abbrev-ref HEAD
+	bname = !git rev-parse --abbrev-ref HEAD # "branch name"
 	# Get folders with changed files in it
-	cdirs = !git diff --dirstat=files,0 | awk -F ' ' '{print $2}'
+	cdirs = !git diff --dirstat=files,0 | awk -F ' ' '{print $2}' # "changed directories"
 
-	# shortcuts
 	a = add
-	aa = add -A .
-	as = !git ls-files -m -o --exclude-standard | fzf -m --print0 | xargs -0 -o -t git add # fuzzy search file(s) for adding
-
-	cl = clone
+	aa = add -A . # "add all"
+	as = !git ls-files -m -o --exclude-standard | fzf -m --print0 | xargs -0 -o -t git add # fuzzy search file(s) for adding; "add search"
 
 	co = checkout
 	cob = checkout -b
-	cosb = !git branch | fzf | xargs git checkout && git fetch origin # checkout search branch
+	cosb = !git branch | fzf | xargs git checkout && git fetch origin # "checkout search branch"
 	# undoing
-	uf = !git ls-files -m | fzf -m --print0 | xargs -0 -o -t git checkout # undo file(s)
-	ud = !git cdirs | fzf -m --print0 | xargs -0 -o -t git checkout # undo director(y/ies)
+	uf = !git ls-files -m | fzf -m --print0 | xargs -0 -o -t git checkout # "undo file(s)"
+	ud = !git cdirs | fzf -m --print0 | xargs -0 -o -t git checkout # "undo director(y/ies)"
 
 	cm = commit
 	cmm = commit -m
 	cma = commit --amend
 
-	aacmm = !git add -A . && git commit -m
+	aacmm = !git add -A . && git commit -m # "add all commit message"
 
 	d = diff
 
@@ -53,8 +68,8 @@
 	pf = push --force-with-lease
 	# Push the current branch to the remote "origin", and set it to track the upstream branch
 	pub = !git push -u origin $(git bname)
-	# Delete remote branch
-	pd = push --delete origin
+	# Delete the remote version of the current branch
+	unpub = !git push origin :$(git bname)
 
 	f = fetch
 	pl = pull origin
@@ -62,7 +77,7 @@
 	r = reset
 	r1 = reset HEAD^
 	r2 = reset HEAD^^
-	rh = reset --hard
+	rh = reset --hard # "reset hard"
 	rh1 = reset HEAD^ --hard
 	rh2 = reset HEAD^^ --hard
 
@@ -70,15 +85,19 @@
 	sa = stash apply
 	sp = stash pop
 	ss = stash save
+	# stash all changes including untracked and ignored files
+	staash = stash -a
 
 	st = status -sb
 
 	br = branch
 	brd = !git branch | fzf | xargs -t git branch -D # delete local branch
+	# Clean branches already merged into main (except for dev & develop & )
+	cleanup = "!git branch --merged main | grep  -v '\\*\\|main\\|dev|develop|development' | xargs -n 1 git branch -d"
 
 	# Prettify log
 	lg = log --graph --abbrev-commit --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
-	h = log --graph --date=short --all --pretty=format:"%C(auto)%h %ad (%cr) %s%d [%Cgreen %an %Creset]"
+	h = log --graph --date=short --all --pretty=format:'%C(auto)%h %ad (%cr) %s%d [%Cgreen %an %Creset]'
 
 	# amend to last commit w/o editing commit msg
 	amend = !git add -A && git commit --amend --no-edit
@@ -107,17 +126,15 @@
 	new = lg main..HEAD
 	missing = lg HEAD..main
 
-[gpg "x509"]
-	program = smimesign
-[gpg]
-	format = x509
 # Save resolved conflicts so they can be reused later
 [rerere]
 	# autoupdate = true
 	enabled = true
+
 [init]
 	defaultBranch = main
 
-
 [includeIf "gitdir/i:~/Code/hashnode/"]
 	path = ~/.gitconfig-hashnode
+[includeIf "gitdir/i:~/Code/ippen/"]
+	path = ~/.gitconfig-ippen

@@ -90,10 +90,10 @@ map <Up> k
 map <Right> l
 
 " Jumplist navigation
-nnoremap <C-u> <C-i>
-nnoremap <C-e> <C-o>
-vnoremap <C-u> <C-i>
-vnoremap <C-e> <C-o>
+" nnoremap <C-u> <C-i>
+" nnoremap <C-e> <C-o>
+" vnoremap <C-u> <C-i>
+" vnoremap <C-e> <C-o>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Move Blocks
