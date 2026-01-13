@@ -1,4 +1,4 @@
-export TEXT_EDITOR="Visual Studio Code"
+export TEXT_EDITOR="nvim"
 
 # Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
 export PYTHONIOENCODING='UTF-8';
@@ -8,22 +8,61 @@ export PIPENV_VENV_IN_PROJECT="enabled"
 export POETRY_VIRTUALENVS_IN_PROJECT=true
 
 # Use fd for fzf
-export FZF_DEFAULT_COMMAND="fd --hidden --follow --exclude '.git' --exclude 'node_modules'"
+export FZF_DEFAULT_COMMAND="fd --hidden --follow --exclude '.git' --exclude 'node_modules' --exclude '.cache' --exclude 'target' --exclude 'build' --exclude 'dist'"
 export FZF_DEFAULT_OPTS="
 --layout=reverse
 --info=inline
 --multi
 --height=80%
---preview-window=:hidden
---preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'
+--preview '([[ -f {} ]] && (bat --style=numbers --color=always --line-range :500 {} || cat {})) || ([[ -d {} ]] && (eza --tree --color=always {} | head -200)) || echo {} 2> /dev/null | head -200'
 --bind '?:toggle-preview'
 --bind 'ctrl-a:select-all'
+--bind 'ctrl-d:half-page-down,ctrl-u:half-page-up'
+--bind 'alt-up:preview-half-page-up,alt-down:preview-half-page-down'
+# catpuccin-mocha theme (https://github.com/catppuccin/fzf/blob/7c2e05606f2e75840b1ba367b1f997cd919809b3/themes/catppuccin-fzf-mocha.sh)
+--color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8 \
+--color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC \
+--color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 \
+--color=selected-bg:#45475A \
+--color=border:#6C7086,label:#CDD6F4
 "
-
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND --type f"
-# Enable ALT_C
-bindkey "ç" fzf-cd-widget
 export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND --type d"
+_fzf_comprun() {
+  local command=$1
+  shift
+
+  case "$command" in
+    cd)           fzf --preview 'eza --tree --color=always {} | head -200 ' "$@" ;;
+    export|unset) fzf --preview 'eval "echo \$"{}' "$@" ;;
+    ssh)          fzf --preview 'dig {}' "$@" ;;
+    *)            fzf --preview "--preview 'bat -n --color=always --line-range :500 {}'" "$@" ;;
+  esac
+}
+# for ** file completion
+_fzf_compgen_path() {
+  eval "$FZF_DEFAULT_COMMAND" . "$1"
+}
+# for ** directory completion
+_fzf_compgen_path_dir() {
+  eval "$FZF_DEFAULT_COMMAND --type d" . "$1"
+}
+# add git fzf shortcuts (e.g. <ctrl-g><ctrl-b> for git branches)
+source ~/fzf-git.sh/fzf-git.sh
+
+# Ensure that GPG works with TTY
+export GPG_TTY=$(tty)
+
+# Auto-enable corepack for each new Node.js version
+export FNM_COREPACK_ENABLED=true
+
+# -- Claude Code
+export DISABLE_TELEMETRY=1
+# updates are done through brew
+# export DISABLE_AUTOUPDATER=1
+
+# -- Yazi
+export EDITOR="nvim"
 
 # This should be the last line of the file
 # For local changes

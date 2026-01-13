@@ -44,6 +44,8 @@ if [ -x "$(command -v pnpm)" ]; then
   alias pn='pnpm'
 fi
 
+# alias claude="~/.claude/local/claude"
+
 # ---------------------------------
 # vim
 # ---------------------------------
@@ -78,7 +80,6 @@ alias chgrp='chgrp --preserve-root'
 alias ungit="find . -name '.git' -exec rm -rf {} \;"
 # Note: these aliases have been moved to .gitconfig
 alias g='git'
-alias gf='git flow'
 
 # ---------------------------------
 # Brew

@@ -43,6 +43,8 @@
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
 
+auto-update-channel = tip
+
 shell-integration = zsh
 font-family = Hack
 font-size = 14
@@ -53,7 +55,7 @@ scrollback-limit = 10000000
 window-save-state = always
 
 
-keybind = shift+enter=text:\x1b\r
+# keybind = shift+enter=text:\x1b\r
 
 # right option acts as alt -> needed for vim Meta key commands (e.g. <M-t>)
 # left still acts as option -> needed for special characters (e.g. – (Option+-))
