@@ -7,6 +7,9 @@ return {
           split = {
             width = 110,
           },
+          keys = {
+            prompt = { "<a-p>", "prompt" },
+          },
         },
       },
     },
