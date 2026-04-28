@@ -1,4 +1,25 @@
-local js_formatters = { "oxfmt", "prettier", stop_after_first = true }
+local formatters = { "oxfmt", "prettier", stop_after_first = true }
+
+local supported = {
+  "astro",
+  "css",
+  "graphql",
+  "handlebars",
+  "html",
+  "javascript",
+  "javascriptreact",
+  "json",
+  "jsonc",
+  "less",
+  "markdown",
+  "markdown.mdx",
+  "scss",
+  "svelte",
+  "typescript",
+  "typescriptreact",
+  "vue",
+  "yaml",
+}
 
 return {
   "stevearc/conform.nvim",
@@ -11,8 +32,8 @@ return {
       cwd = require("conform.util").root_file({ ".oxfmtrc.json", ".oxfmtrc.jsonc", "oxfmt.config.ts" }),
     }
 
-    for _, ft in ipairs({ "javascript", "javascriptreact", "typescript", "typescriptreact" }) do
-      opts.formatters_by_ft[ft] = vim.deepcopy(js_formatters)
+    for _, ft in ipairs(supported) do
+      opts.formatters_by_ft[ft] = vim.deepcopy(formatters)
     end
   end,
 }
