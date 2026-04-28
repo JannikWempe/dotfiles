@@ -14,11 +14,12 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # fixes compdef not found error
 # see: https://stackoverflow.com/a/76900597
 autoload -Uz compinit && compinit
-# Load 1Password CLI completions
-eval "$(op completion zsh)"
-
-# Activate Node environment on cd
-eval "$(fnm --log-level quiet env --use-on-cd --version-file-strategy recursive)"
+if [[ -o interactive ]]; then
+  # Load 1Password CLI completions
+  eval "$(op completion zsh)"
+  # Activate Node environment on cd
+  eval "$(fnm --log-level quiet env --use-on-cd --version-file-strategy recursive)"
+fi
 
 # Allow auto updates without prompt
 DISABLE_UPDATE_PROMPT=true

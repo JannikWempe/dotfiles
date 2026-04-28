@@ -1,6 +1,12 @@
 return {
   "folke/snacks.nvim",
   opts = {
+    lazygit = {
+      win = {
+        width = 0.97,
+        height = 0.97,
+      },
+    },
     picker = {
       -- Show hidden files by default
       hidden = { "preview" },

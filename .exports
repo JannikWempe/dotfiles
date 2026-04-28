@@ -56,11 +56,6 @@ export GPG_TTY=$(tty)
 # Auto-enable corepack for each new Node.js version
 export FNM_COREPACK_ENABLED=true
 
-# -- Claude Code
-export DISABLE_TELEMETRY=1
-# updates are done through brew
-# export DISABLE_AUTOUPDATER=1
-
 # -- Yazi
 export EDITOR="nvim"
 
