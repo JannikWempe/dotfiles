@@ -44,15 +44,9 @@ local function setup_fix_on_save(bufnr)
   })
 end
 
--- Use oxlint instead of eslint in projects with oxlint config.
--- oxlint only attaches when an oxlint config exists.
--- When oxlint attaches, eslint is stopped for that project (and vice versa on attach order).
-
-vim.lsp.config("oxlint", {
-  cmd = { "npx", "oxlint", "--lsp" },
-  root_markers = { ".oxlintrc.json", ".oxlintrc.jsonc", "oxlint.config.ts" },
-})
-vim.lsp.enable("oxlint")
+-- oxlint LSP is configured by the lang.typescript.oxc extra.
+-- Here we just ensure eslint is stopped when oxlint attaches (and vice versa),
+-- and run fix-on-save for whichever client is active.
 
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
