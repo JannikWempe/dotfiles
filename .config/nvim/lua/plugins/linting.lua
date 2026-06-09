@@ -44,9 +44,9 @@ local function setup_fix_on_save(bufnr)
   })
 end
 
--- oxlint LSP is configured by the lang.typescript.oxc extra.
--- Here we just ensure eslint is stopped when oxlint attaches (and vice versa),
--- and run fix-on-save for whichever client is active.
+-- Prefer oxlint over eslint when both are available for a buffer.
+-- oxlint behavior itself should otherwise follow the built-in lspconfig definition.
+vim.lsp.enable("oxlint")
 
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
