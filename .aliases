@@ -85,7 +85,26 @@ alias g='git'
 # Brew
 # ---------------------------------
 # Update everything at once (brew && brew cask)
-alias brewup='brew update && brew upgrade && brew cu -a -f --cleanup -y && brew cleanup; brew doctor'
+export HOMEBREW_NO_ASK=1
+# alias brewup='brew update && brew upgrade && brew cu -a -f --cleanup -y && brew cleanup; brew doctor'
+brewup() {
+  _step() { echo "\n\033[1;34m==> $1\033[0m"; }
+
+  _step "Updating Homebrew"
+  brew update
+
+  _step "Upgrading formulae & casks"
+  brew upgrade
+
+  _step "Upgrading auto-updating casks"
+  brew cu -a -f -y --no-brew-update
+
+  _step "Cleaning up"
+  brew cleanup
+
+  _step "Running brew doctor"
+  brew doctor
+}
 
 
 # ---------------------------------
