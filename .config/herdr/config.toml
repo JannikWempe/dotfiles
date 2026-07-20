@@ -69,7 +69,7 @@ detach = "prefix+d"
 # reload_config = "prefix+shift+r"
 open_notification_target = "prefix+shift+o"
 workspace_picker = "" # use prefix+s or prefix+w instead
-goto = "prefix+w"
+goto = ""
 new_workspace = "prefix+shift+s"
 # new_worktree = "prefix+shift+g"
 # open_worktree = ""    # optional, unset by default
@@ -312,3 +312,15 @@ key = "prefix+s"
 type = "plugin_action"
 command = "sessionizer.open"
 description = "open project workspace"
+
+[[keys.command]]
+key = "prefix+w"
+type = "plugin_action"
+command = "switcharoo.open"
+description = "goto workspace, tab, or worktree"
+
+[[keys.command]]
+key = "prefix+shift+p"
+type = "plugin_action"
+command = "jt.command-palette.open"
+description = "Command palette"

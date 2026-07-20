@@ -1,6 +1,6 @@
 [projects]
 # Parent folders searched by the interactive pickers
-roots = ["~/Code"]
+roots = ["~/Code", "~/Projects"]
 # true: only git repos; false: all immediate child folders
 git_only = true
 # Only used when git_only = true; 1 means immediate children
