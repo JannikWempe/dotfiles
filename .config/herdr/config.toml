@@ -3,7 +3,7 @@
 
 # Show first-run notification setup on startup.
 # Missing also shows onboarding; set false after you've chosen.
-# onboarding = true
+onboarding = false
 
 [theme]
 # Built-in themes: catppuccin, terminal, tokyo-night, dracula, nord,
@@ -68,7 +68,7 @@ settings = "prefix+shift+comma"
 detach = "prefix+d"
 # reload_config = "prefix+shift+r"
 open_notification_target = "prefix+shift+o"
-workspace_picker = "" # use prefix+s or prefix+w instead
+workspace_picker = ""                       # use prefix+s or prefix+w instead
 goto = ""
 new_workspace = "prefix+shift+s"
 # new_worktree = "prefix+shift+g"
