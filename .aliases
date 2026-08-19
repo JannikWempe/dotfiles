@@ -2,7 +2,7 @@
 # Common aliases
 # ---------------------------------
 
-alias reload='source ~/.zshrc'
+alias reload='exec zsh'
 
 alias s='sudo $1'
 alias c='clear'
