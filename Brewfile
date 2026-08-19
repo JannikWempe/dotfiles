@@ -54,7 +54,7 @@ brew "golangci-lint"
 brew "uv"
 
 # JS/TS
-brew "fnm"
+brew "mise"
 brew "deno"
 tap "oven-sh/bun"
 brew "oven-sh/bun/bun"

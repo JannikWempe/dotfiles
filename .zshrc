@@ -17,8 +17,8 @@ autoload -Uz compinit && compinit
 if [[ -o interactive ]]; then
   # Load 1Password CLI completions
   eval "$(op completion zsh)"
-  # Activate Node environment on cd
-  eval "$(fnm --log-level quiet env --use-on-cd --version-file-strategy recursive)"
+  # Activate mise (node etc.) environment on cd
+  eval "$(mise activate zsh)"
 fi
 
 # Allow auto updates without prompt
@@ -45,7 +45,6 @@ plugins=(
     docker
     fd
     ripgrep
-    fnm
     gh
     fzf # + key bindings
 

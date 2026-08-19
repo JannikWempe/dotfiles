@@ -35,11 +35,6 @@ if [ -x "$(command -v bat)" ]; then
   alias cat='bat -pp --theme="Nord"'
 fi
 
-if [ -x "$(command -v fnm)" ]; then
-  alias nvm='fnm'
-fi
-
-
 if [ -x "$(command -v pnpm)" ]; then
   alias pn='pnpm'
 fi

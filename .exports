@@ -54,7 +54,7 @@ source ~/fzf-git.sh/fzf-git.sh
 export GPG_TTY=$(tty)
 
 # Auto-enable corepack for each new Node.js version
-export FNM_COREPACK_ENABLED=true
+export MISE_NODE_COREPACK=true
 
 # -- Yazi
 export EDITOR="nvim"

@@ -33,7 +33,7 @@ brew install git
 # ---------------------------------------------
 
 # NodeJS
-brew install fnm # node version manager
+brew install mise # node (and more) version manager
 
 # Python 3
 brew install python
