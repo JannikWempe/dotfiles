@@ -1,4 +1,8 @@
 [tools]
+bun = "latest"
+deno = "latest"
+go = "latest"
+golangci-lint = "latest"
 node = "lts"
 rust = "latest"
 
