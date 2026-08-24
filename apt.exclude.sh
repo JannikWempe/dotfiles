@@ -18,8 +18,10 @@ apt upgrade -y
 # Programming Languages and Frameworks
 # ---------------------------------------------
 
-# NodeJS 
-apt install nodejs -y
+# NodeJS (and other runtimes) via mise - see .config/mise/config.toml
+# Installs to ~/.local/bin/mise; activate it in your shell rc:
+#   eval "$(mise activate bash)"
+curl -fsSL https://mise.run | sh
 
 # ---------------------------------------------
 # Tools I use often
