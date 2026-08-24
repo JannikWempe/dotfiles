@@ -6,20 +6,18 @@
 PROMPT='[herdr]'
 DIR="$(cd "$(dirname "$0")" && pwd)"
 
-herdr plugin install -y devashish2203/herdr-worktrunk
+herdr plugin install -y thanhdat77/herdr-navigator
 herdr plugin install -y JanTvrdik/herdr-command-palette
-herdr plugin install -y andrewchng/herdr-sessionizer
-herdr plugin install -y JannikWempe/herdr-switcharoo
+herdr plugin install -y devashish2203/herdr-worktrunk
 
-# Plugin configs live in this repo; herdr reads them from plugins/config/<id>.
+# Link tracked config files while leaving plugin runtime state untracked.
 for cfg in "$DIR/.config/herdr/plugin-config"/*; do
 	name="$(basename "$cfg")"
 	target="$HOME/.config/herdr/plugins/config/$name"
-	if [ -e "$target" ] && [ ! -L "$target" ]; then
-		mv -v "$target" "$target.bak"
-	fi
-	mkdir -p "$HOME/.config/herdr/plugins/config"
-	ln -sfnv "$cfg" "$target"
+	mkdir -p "$target"
+	for file in "$cfg"/*; do
+		ln -sfnv "$file" "$target/$(basename "$file")"
+	done
 done
 
 echo "$PROMPT Done"

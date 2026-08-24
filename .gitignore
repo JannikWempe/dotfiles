@@ -3,4 +3,7 @@
 # Local configuration files
 *.local
 
+# Herdr-managed plugin checkouts, builds, and runtime state
+.config/herdr/plugins/
+
 .idea/
