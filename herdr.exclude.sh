@@ -6,9 +6,9 @@
 PROMPT='[herdr]'
 DIR="$(cd "$(dirname "$0")" && pwd)"
 
-herdr plugin install -y thanhdat77/herdr-navigator
-herdr plugin install -y JanTvrdik/herdr-command-palette
-herdr plugin install -y devashish2203/herdr-worktrunk
+herdr plugin install thanhdat77/herdr-navigator --yes
+herdr plugin install JanTvrdik/herdr-command-palette --yes
+herdr plugin install devashish2203/herdr-worktrunk --yes
 
 # Link tracked config files while leaving plugin runtime state untracked.
 for cfg in "$DIR/.config/herdr/plugin-config"/*; do
