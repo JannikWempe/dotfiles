@@ -63,12 +63,14 @@ function git {
 
 # Opens the AWS Console for a given sso profile
 awsc() {  # awsc om-prod [destination-url]
-  local p=$1 s a r u
+  local p=$1 s a r u opener=open
   s=$(aws configure get sso_session --profile "$p")
   a=$(aws configure get sso_account_id --profile "$p")
   r=$(aws configure get sso_role_name --profile "$p")
   u=$(awk -v s="[sso-session $s]" '$0==s{f=1;next} /^\[/{f=0} f&&/sso_start_url/{print $3;exit}' ~/.aws/config)
-  open "${u%/}/#/console?account_id=$a&role_name=$r&destination=${2:-https://$(aws configure get region --profile "$p").console.aws.amazon.com/}"
+  [[ $OSTYPE == linux* ]] && opener=xdg-open
+  grep -qi microsoft /proc/sys/kernel/osrelease 2>/dev/null && opener=explorer.exe
+  "$opener" "${u%/}/#/console?account_id=$a&role_name=$r&destination=${2:-https://$(aws configure get region --profile "$p").console.aws.amazon.com/}"
 }
 
 # This should be the last line of the file
