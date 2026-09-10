@@ -1,95 +1,78 @@
 #!/usr/bin/env bash
 
-# Install my favourite tools using the apt package manager (currently tested only on Debian buster)
+# Install my favourite tools using apt (works on Debian and Ubuntu)
+# Run with sudo: user-level bits (mise, oh-my-zsh, docker group) go to the invoking user.
+
+set -e
 
 PROMPT='[apt-install]'
 
-echo "$PROMPT I hope you're running this script as root!"
+if [ "$(id -u)" -ne 0 ]; then
+	echo "$PROMPT Run me with sudo/as root"
+	exit 1
+fi
 
+# Real user for user-level installs when run via sudo
+TARGET_USER="${SUDO_USER:-root}"
+TARGET_HOME=$(eval echo "~$TARGET_USER")
 
-# Update apt
+# Gives $ID (debian|ubuntu) and $VERSION_CODENAME, used for the Docker repo
+. /etc/os-release
+
 apt update -y
-
-# Upgrade any preinstalled packages
 apt upgrade -y
 
+# ---------------------------------------------
+# Tools I use often
+# ---------------------------------------------
+
+# sudo/curl also needed by the mise and oh-my-zsh installers below
+apt install -y sudo git vim httpie tree curl ca-certificates gnupg
 
 # ---------------------------------------------
 # Programming Languages and Frameworks
 # ---------------------------------------------
 
 # NodeJS (and other runtimes) via mise - see .config/mise/config.toml
-# Installs to ~/.local/bin/mise; activate it in your shell rc:
-#   eval "$(mise activate bash)"
-curl -fsSL https://mise.run | sh
+# Installs to $TARGET_HOME/.local/bin/mise; .zshrc activates it
+sudo -u "$TARGET_USER" sh -c 'curl -fsSL https://mise.run | sh'
 
-# ---------------------------------------------
-# Tools I use often
-# ---------------------------------------------
-
-# Git, obviously
-apt install git -y
-
-# Docker for containerization
-# Official installation instructions: https://docs.docker.com/install/linux/docker-ce/ubuntu/
-apt install apt-transport-https ca-certificates curl software-properties-common -y
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+# Docker (official repo, keyring method)
+install -m 0755 -d /etc/apt/keyrings
+curl -fsSL "https://download.docker.com/linux/$ID/gpg" -o /etc/apt/keyrings/docker.asc
+chmod a+r /etc/apt/keyrings/docker.asc
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/$ID $VERSION_CODENAME stable" > /etc/apt/sources.list.d/docker.list
 apt update -y
-apt install docker-ce docker-ce-cli containerd.io -y
+apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+usermod -aG docker "$TARGET_USER"
 echo "$PROMPT Verifying docker installation using a hello world container..."
-# Verify the installaiton
-docker run hello-world
-
-# Docker Compose
-apt install docker-compose -y
-
-# Vim B)
-apt install vim -y
-
-# Make requests with awesome response formatting
-apt install httpie -y
-
-# Show directory structure with excellent formatting
-apt install tree -y
-
+docker run --rm hello-world
 
 # ---------------------------------------------
 # Misc
 # ---------------------------------------------
 
-# Zsh 
-apt install zsh -y
-echo "$PROMPT This script (intentionally) does not install the Oh-my-zsh framework. If you want it, install it manually!"
+# Zsh + oh-my-zsh (required by .zshrc) as default shell
+apt install -y zsh
+if [ ! -d "$TARGET_HOME/.oh-my-zsh" ]; then
+	sudo -u "$TARGET_USER" sh -c 'RUNZSH=no CHSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
+fi
+chsh -s "$(command -v zsh)" "$TARGET_USER"
 
-# The Fire Code font
-apt install fonts-firacode -y
+# The Fira Code font
+apt install -y fonts-firacode
 
 # My favorite text editor: VS Code
 # Installation instructions: https://code.visualstudio.com/docs/setup/linux
-curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
-install -o root -g root -m 644 packages.microsoft.gpg /usr/share/keyrings/
-sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
-apt install apt-transport-https -y
-apt update
-apt install code -y
-echo "$PROMPT VS Codes adds some GPG key during its install. Removing it!"
-rm packages.microsoft.gpg
+curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /etc/apt/keyrings/packages.microsoft.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list
+apt update -y
+apt install -y code
 
 # ---------------------------------------------
 # Terminal gimmicks xD
 # ---------------------------------------------
 
-# The computer fortune teller 
-apt install fortune -y
+apt install -y fortune-mod cowsay lolcat
 
-# The famous cowsay
-apt install cowsay -y
-
-# Multicolored text output -y
-apt install lolcat -y
-
-
-# Cleanup the cache (TODO: set up a cron to do this)
 apt clean
- 
