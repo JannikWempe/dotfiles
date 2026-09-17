@@ -1,5 +1,5 @@
 # Move to ~/Brewfile in order to be able to use `brew bundle --global` command
-# Languages (node, rust, go, bun, deno, golangci-lint) are managed via mise, not brew.
+# Languages (node, python, rust, go, bun, deno, golangci-lint) and uv are managed via mise, not brew.
 
 tap "buo/cask-upgrade"
 
@@ -41,7 +41,6 @@ brew "mole"
 # AI
 tap "anomalyco/tap"
 brew "anomalyco/tap/opencode"
-brew "anomalyco/tap/sst"
 brew "herdr"
 brew "pi-coding-agent"
 
@@ -60,12 +59,10 @@ brew "modem-dev/tap/hunk"
 
 # Version/package managers (languages themselves via mise)
 brew "mise"
-brew "uv"
 
 # Databases
 brew "libpq"
 brew "sqlcmd"
-brew "supabase"
 
 # AWS
 brew "aws-sam-cli"

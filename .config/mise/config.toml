@@ -4,7 +4,11 @@ deno = "latest"
 go = "latest"
 golangci-lint = "latest"
 node = "lts"
+python = "latest"
 rust = "latest"
+uv = "latest"
 
 [settings]
-idiomatic_version_file_enable_tools = ["node"]
+idiomatic_version_file_enable_tools = ["node", "bun", "deno", "pnpm", "python"]
+color_theme = "catppuccin"
+python.uv_venv_auto = "source"                                                  # activate existing .venv
