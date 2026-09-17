@@ -63,10 +63,7 @@ alias mv='mv -i'
 alias cp='cp -i'
 alias ln='ln -i'
 
-# Parenting changing perms on /
-alias chown='chown --preserve-root'
-# alias chmod='chmod --preserve-root' # doesn't work on macos
-alias chgrp='chgrp --preserve-root'
+# --preserve-root aliases for chown/chmod/chgrp don't work on macos
 
 # ---------------------------------
 # Git

@@ -11,14 +11,14 @@ export ZSH="${HOME}/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
+# Docker CLI completions
+fpath=(/Users/jannik/.docker/completions $fpath)
 # fixes compdef not found error
 # see: https://stackoverflow.com/a/76900597
 autoload -Uz compinit && compinit
 if [[ -o interactive ]]; then
   # Load 1Password CLI completions
   eval "$(op completion zsh)"
-  # Activate mise (node etc.) environment on cd
-  eval "$(mise activate zsh)"
 fi
 
 # Allow auto updates without prompt
@@ -26,8 +26,6 @@ DISABLE_UPDATE_PROMPT=true
 
 # show timostamps for `history`
 HIST_STAMPS="yyyy-mm-dd"
-# don't put duplicates and commands starting with whitespace into history
-HISTCONTROL=ignoreboth
 
 # See https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins
 plugins=(
@@ -79,13 +77,8 @@ if [ -x "$(command -v zoxide)" ]; then
   [[ $- == *i* ]] && [ -z "$DISABLE_ZOXIDE" ] && eval "$(zoxide init --cmd cd zsh)"
 fi
 
-# bun completions (added via `bun completions`)
-[ -s "/opt/homebrew/Cellar/bun/1.0.0/share/zsh/site-functions/_bun" ] && source "/opt/homebrew/Cellar/bun/1.0.0/share/zsh/site-functions/_bun"
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [ -f ~/.p10k.zsh ] && source ~/.p10k.zsh
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # pnpm
 export PNPM_HOME="/Users/jannik/Library/pnpm"
@@ -96,11 +89,6 @@ esac
 # pnpm end
 
 . "$HOME/.local/bin/env"
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=(/Users/jannik/.docker/completions $fpath)
-autoload -Uz compinit
-compinit
-# End of Docker CLI completions
 
 # add kubectl completion
 if [ -x "$(command -v kubectl)" ]; then
@@ -110,3 +98,6 @@ fi
 # This should be the last line of the file; don't make edits below this
 # For local changes
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+# Activate mise last so its tool paths win over everything above (mise doctor)
+[[ -o interactive ]] && eval "$(mise activate zsh)"
