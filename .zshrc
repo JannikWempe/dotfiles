@@ -11,8 +11,8 @@ export ZSH="${HOME}/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-# Docker CLI completions
-fpath=(/Users/jannik/.docker/completions $fpath)
+# Docker CLI completions (Docker Desktop generates these; = `docker completion zsh`)
+[ -d "$HOME/.docker/completions" ] && fpath=("$HOME/.docker/completions" $fpath)
 # fixes compdef not found error
 # see: https://stackoverflow.com/a/76900597
 autoload -Uz compinit && compinit
@@ -40,7 +40,6 @@ plugins=(
     # npm # using my own aliases
 
     ### autocompletions
-    docker
     fd
     ripgrep
     gh
