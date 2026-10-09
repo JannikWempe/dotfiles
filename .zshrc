@@ -89,6 +89,8 @@ if [ -x "$(command -v kubectl)" ]; then
   source <(kubectl completion zsh)
 fi
 
+if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
+
 # This should be the last line of the file; don't make edits below this
 # For local changes
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
