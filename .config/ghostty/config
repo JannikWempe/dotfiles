@@ -35,6 +35,6 @@ mouse-scroll-multiplier = 0.95
 
 shell-integration-features = ssh-terminfo,ssh-env
 
-# right option acts as alt -> needed for vim Meta key commands (e.g. <M-t>)
-# left still acts as option -> needed for special characters (e.g. – (Option+-))
-macos-option-as-alt = right
+# left option acts as alt -> needed for vim Meta key commands (e.g. <M-t>) and lazygit <alt+w>/<alt+u>
+# right still acts as option -> needed for special characters (e.g. – (Option+-))
+macos-option-as-alt = left
