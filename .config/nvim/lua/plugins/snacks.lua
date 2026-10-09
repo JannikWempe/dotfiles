@@ -9,7 +9,7 @@ return {
     },
     picker = {
       -- Show hidden files by default
-      hidden = { "preview" },
+      hidden = true,
       -- Show more of the file path in the picker
       -- Because otherwise some files may not be distinguishable
       formatters = {
