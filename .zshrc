@@ -59,7 +59,10 @@ export ZSH_HIGHLIGHT_MAXLENGTH=512
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
 
-source $ZSH/oh-my-zsh.sh
+source "$ZSH/oh-my-zsh.sh"
+
+# Pass unmatched globs through literally (bash-like) instead of failing with "no matches found"
+setopt no_nomatch
 
 # Source this first since it contains the locations of directories needed by funcitons
 source ~/.exports
