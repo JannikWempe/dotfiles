@@ -18,3 +18,6 @@ if os.getenv("SSH_TTY") then
   }
   vim.opt.clipboard = "unnamedplus"
 end
+
+-- Lint fixes run via plugins/linting.lua, not eslint's LSP formatter
+vim.g.lazyvim_eslint_auto_format = false
