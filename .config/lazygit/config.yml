@@ -1,0 +1,41 @@
+disableStartupPopups: true
+update:
+  method: never # managed by Homebrew
+os:
+  # open files in the surrounding nvim if there is one, else a new nvim
+  editPreset: nvim-remote
+gui:
+  nerdFontsVersion: "3"
+  showDivergenceFromBaseBranch: arrowAndNumber
+  filterMode: fuzzy
+  showRandomTip: false
+git:
+  log:
+    order: default # topo-order is slow in large repos
+  parseEmoji: true
+  diffRenderers:
+    - colorArg: always
+      # --{{colorScheme}} becomes --dark/--light to match the terminal background
+      command: delta --{{colorScheme}} --paging=never --side-by-side --line-numbers
+      #pager: hunk pager --mode split --line-numbers
+  overrideGpg: true
+  # no background fetch: avoids 1Password unlock prompts from idle lazygit instances
+  autoFetch: false
+  # don't move main/master (or update agents' worktrees) behind my back
+  autoForwardBranches: none
+customCommands:
+  - key: <alt+w>
+    context: files
+    command: git wip
+    description: WIP commit
+  - key: <alt+u>
+    context: files
+    command: git uncommit
+    description: undo last commit
+  - key: "E"
+    command: "git commit --allow-empty -m '{{.Form.Message}}'"
+    context: "files"
+    prompts:
+      - type: "input"
+        title: "Empty commit message"
+        key: "Message"

@@ -11,7 +11,7 @@ TARGET_DIR="$HOME/.config"
 # Apps whose config dir also collects runtime state (logs, sockets, session files)
 # on the machine. For these the target stays a real directory and each entry is
 # linked individually, so runtime files never end up in this repo.
-CONTENTS_APPS='herdr'
+CONTENTS_APPS='herdr lazygit'
 
 usage () {
 	cat <<EOF
