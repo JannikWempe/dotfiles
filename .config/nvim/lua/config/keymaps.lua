@@ -109,5 +109,5 @@ vim.keymap.set("x", "<M-Up>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<
 
 -- i don't need single chars in my copy list
 vim.keymap.set({ "n", "x" }, "x", '"_x', { desc = "Delete Chars Into Void" })
-vim.keymap.set({ "n", "x" }, "X", '"_x', { desc = "Delete Chars Into Void" })
+vim.keymap.set({ "n", "x" }, "X", '"_X', { desc = "Delete Chars Before Into Void" })
 vim.keymap.set({ "n", "x" }, "<Del>", '"_x', { desc = "Delete Chars Into Void" })
