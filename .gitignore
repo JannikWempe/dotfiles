@@ -7,3 +7,4 @@
 .config/herdr/plugins/
 
 .idea/
+/.config/mise/config.local.toml
