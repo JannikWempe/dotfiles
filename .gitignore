@@ -8,3 +8,6 @@
 
 .idea/
 /.config/mise/config.local.toml
+
+# Installed by tpm (see linux.exclude.sh / tmux.conf)
+.config/tmux/plugins/

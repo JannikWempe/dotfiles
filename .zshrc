@@ -5,7 +5,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 export ZSH="${HOME}/.oh-my-zsh"
 
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
@@ -16,7 +16,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # fixes compdef not found error
 # see: https://stackoverflow.com/a/76900597
 autoload -Uz compinit && compinit
-if [[ -o interactive ]]; then
+if [[ -o interactive ]] && command -v op >/dev/null 2>&1; then
   # Load 1Password CLI completions
   eval "$(op completion zsh)"
 fi
@@ -40,8 +40,6 @@ plugins=(
     # npm # using my own aliases
 
     ### autocompletions
-    fd
-    ripgrep
     gh
     fzf # + key bindings
 
@@ -82,7 +80,7 @@ fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [ -f ~/.p10k.zsh ] && source ~/.p10k.zsh
 
-. "$HOME/.local/bin/env"
+[ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
 
 # add kubectl completion
 if [ -x "$(command -v kubectl)" ]; then

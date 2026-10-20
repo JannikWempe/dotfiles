@@ -56,7 +56,7 @@ install_tools () {
 		# TODO - regex here?
 		if [ "$resp" = 'y' -o "$resp" = 'Y' ] ; then
 			echo "$PROMPT Installing useful stuff using apt. This may take a while..."
-			sh apt.exclude.sh
+			sudo bash linux.exclude.sh
 		else
 			echo "$PROMPT Apt installation cancelled by user"
 		fi
