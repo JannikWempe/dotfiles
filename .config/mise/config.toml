@@ -1,15 +1,19 @@
 [tools]
-bun = "latest"
-deno = "latest"
-go = "latest"
-golangci-lint = "latest"
-node = "lts"
-pnpm = "latest"
-python = "latest"
-rust = "latest"
-uv = "latest"
+bun = { version = "latest", auto_update = true }
+deno = { version = "latest", auto_update = true }
+go = { version = "latest", auto_update = true }
+golangci-lint = { version = "latest", auto_update = true }
+node = { version = "lts", auto_update = true }
+pnpm = { version = "latest", auto_update = true }
+python = { version = "latest", auto_update = true }
+rust = { version = "latest", auto_update = true }
+uv = { version = "latest", auto_update = true }
 
 [settings]
 idiomatic_version_file_enable_tools = ["node", "bun", "deno", "pnpm", "python"]
 color_theme = "catppuccin"
 python.uv_venv_auto = "source"                                                  # activate existing .venv
+tool_update.check_duration = "24h"                                              # interval for auto_update = true
+
+[bootstrap.services.mise-tool-update]
+builtin = "tool-update"
