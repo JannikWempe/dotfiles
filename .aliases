@@ -76,28 +76,47 @@ alias ungit="find . -name '.git' -exec rm -rf {} \;"
 alias g='git'
 
 # ---------------------------------
-# Brew
+# Updates
 # ---------------------------------
-# Update everything at once (brew && brew cask)
 export HOMEBREW_NO_ASK=1
-# alias brewup='brew update && brew upgrade && brew cu -a -f --cleanup -y && brew cleanup; brew doctor'
-brewup() {
+# Update everything at once: brew (macOS) or apt (Linux), then mise and oh-my-zsh
+up() {
   _step() { echo "\n\033[1;34m==> $1\033[0m"; }
 
-  _step "Updating Homebrew"
-  brew update
+  if [[ "$OSTYPE" == darwin* ]]; then
+    _step "Updating Homebrew"
+    brew update
 
-  _step "Upgrading formulae & casks"
-  brew upgrade
+    _step "Upgrading formulae & casks"
+    brew upgrade
 
-  _step "Upgrading auto-updating casks"
-  brew cu -a -f -y --no-brew-update
+    _step "Upgrading auto-updating casks"
+    brew cu -a -f -y --no-brew-update
 
-  _step "Cleaning up"
-  brew cleanup
+    _step "Cleaning up"
+    brew cleanup
 
-  _step "Running brew doctor"
-  brew doctor
+    _step "Running brew doctor"
+    brew doctor
+  else
+    _step "Updating apt"
+    sudo apt update
+
+    _step "Upgrading packages"
+    sudo apt upgrade -y
+
+    _step "Cleaning up"
+    sudo apt autoremove -y && sudo apt clean
+
+    [ -f /var/run/reboot-required ] && _step "Reboot required"
+  fi
+
+  _step "Upgrading mise tools"
+  mise upgrade
+
+  # Keep last: restarts the shell when there are updates
+  _step "Updating oh-my-zsh"
+  omz update
 }
 
 
