@@ -58,10 +58,12 @@ alias vifi='vim $(fzf)'
 # do not delete / or prompt if deleting more than 3 files at a time
 # alias rm='rm -I --preserve-root' # doesn't work on macos "illegal option -- I"
 
-# confirmation
-alias mv='mv -i'
-alias cp='cp -i'
-alias ln='ln -i'
+# confirmation, only with a terminal attached (agent shells have none and would hang on the prompt)
+if [[ -t 0 && -t 1 ]]; then
+  alias mv='mv -i'
+  alias cp='cp -i'
+  alias ln='ln -i'
+fi
 
 # --preserve-root aliases for chown/chmod/chgrp don't work on macos
 
