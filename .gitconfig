@@ -14,6 +14,7 @@
 	editor = nvim
 	pager = delta
 	ignorecase = false
+	excludesfile = ~/.gitignore_global
 
 [interactive]
     diffFilter = delta --color-only
